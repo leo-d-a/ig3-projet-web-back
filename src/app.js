@@ -1,7 +1,7 @@
 
 const express = require('express')
 const helmet = require('helmet')
-const trainingProgram = require('./routes/trainingProgramRoutes')
+const trainingProgram = require('./routes/FormationsRoutes')
 
 
 const app = express()
