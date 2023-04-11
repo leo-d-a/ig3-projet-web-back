@@ -4,42 +4,21 @@ const sequelize = require('../config/database')
 const Patients = sequelize.define('patients', {
 
     id_patient: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue : DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false,
     },
 
     id_utilisateur: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue : DataTypes.UUIDV4,
         allowNull: false
     },
 
-    sexe : {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
-    antecedents_medicaux : {
+    motif_consult : {
         type: DataTypes.STRING,
     },
-
-    antecedents_traitements : {
-        type: DataTypes.STRING,
-    },  
-
-    traitement_actuel : {
-        type: DataTypes.STRING,
-    },
-
-    etat : {
-        type: DataTypes.STRING,
-    },
-
-    situation : {
-        type: DataTypes.STRING,
-    }
-
 })
 
 module.exports = Patients

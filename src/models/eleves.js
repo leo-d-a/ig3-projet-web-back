@@ -4,14 +4,15 @@ const sequelize = require('../config/database')
 const Eleves = sequelize.define('eleves', {
 
     id_eleve: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue : DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false,
     },
 
     id_utilisateur: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue : DataTypes.UUIDV4,
         allowNull: false
     },
 
@@ -23,9 +24,9 @@ const Eleves = sequelize.define('eleves', {
         type: DataTypes.STRING,
     },
 
-    cours_suivis : {
+    profession_sante : {
         type: DataTypes.STRING,
-    }
+    },
 
 })
 

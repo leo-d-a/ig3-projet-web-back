@@ -1,53 +1,30 @@
 const DataTypes = require('sequelize');
-const sequelize = require('../config/database')
+const sequelize = require('../config/database');
+const { validate } = require('uuid');
 
 const InscriptionsFormations = sequelize.define('inscriptionsFormations', {
 
-    id_inscription_formation: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-        allowNull: false,
-    },
-
     id_formation: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue : DataTypes.UUIDV4,
+        primaryKey : true,
         allowNull: false
     },
 
     id_eleve: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue : DataTypes.UUIDV4,
+        primaryKey : true,
         allowNull: false
     },
 
     cree_le : {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        validate : {
+            isDate: true
+        }
     },
-
-    modifie_le : {
-        type: DataTypes.DATE,
-    },
-
-    est_deplace : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-
-    est_annule : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },  
-
-    est_valide : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-
-    est_present : {
-        type: DataTypes.BOOLEAN,
-    }
-    
 
 })
 

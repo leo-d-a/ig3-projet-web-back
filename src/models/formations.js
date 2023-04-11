@@ -1,11 +1,12 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database')
+const sequelize = require('../config/database');
+const { validate } = require('uuid');
 
 const Formations = sequelize.define('formations', {
 
     id_formation: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue : DataTypes.UUIDV4,
         primaryKey: true,
         allowNull: false,
     },
@@ -22,12 +23,18 @@ const Formations = sequelize.define('formations', {
 
     date_debut: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        validate : {
+            isDate: true
+        }
     },
 
     date_fin: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        validate : {
+            isDate: true
+        }
     },  
 
     lieu: {
@@ -36,7 +43,38 @@ const Formations = sequelize.define('formations', {
 
     nb_places: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+        validate : {
+            isNumeric: true
+        }
+    },
+
+    est_deplace : {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate : {
+            isBoolean: true
+        }
+    },
+
+    est_annule : {
+        type: DataTypes.BOOLEAN,
         allowNull: false
+    },  
+
+    est_valide : {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate : {
+            isBoolean: true
+        }
+    },
+
+    est_present : {
+        type: DataTypes.BOOLEAN,
+        validate : {
+            isBoolean: true
+        }
     }
 
 })

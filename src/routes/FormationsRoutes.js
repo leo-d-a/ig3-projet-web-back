@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-router.get("/", (req, res)=>{ res.status(200).send("Training Program Route") })
+router.get("/", (req, res)=>{ res.status(200).send("Formation Route") })
 
 router.post("/", (req, res)=>{ 
     const { name, description, startDate, endDate } = req.body 

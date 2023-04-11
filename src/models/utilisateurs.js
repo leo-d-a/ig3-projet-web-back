@@ -1,60 +1,88 @@
-const DataTypes = require('sequelize');
-const sequelize = require('../config/database')
+const bcrypt = require('bcrypt');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
-const Utilisateurs = sequelize.define('utilisateurs', {
+class Utilisateurs extends Model {
+  async setPassword(password) {
+    const saltRounds = 10;
+    this.mot_de_passe = await bcrypt.hash(password, saltRounds);
+  }
 
-    id : {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+  async checkPassword(password) {
+    return bcrypt.compare(password, this.mot_de_passe);
+  }
+}
+
+Utilisateurs.init(
+  {
+    id: {
+        type: DataTypes.UUID,
+        defaultValue : DataTypes.UUIDV4,
         primaryKey: true,
-        allowNull: false,
+    },
+    nom: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
+    prenom: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    sexe: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
 
-    nom : {
-        type: DataTypes.STRING,
-        allowNull: false
+    date_naissance: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    adresse: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
 
-    prenom : {
-        type: DataTypes.STRING,
-        allowNull: false
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isEmail: true
+      },
     },
 
-    age : {
-        type: DataTypes.INTEGER,
-        allowNull: false
+    telephone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isNumeric: true
+      },
     },
 
-    email : {
-        type: DataTypes.STRING,
-        allowNull: false
+    mot_de_passe: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
 
-    telephone : {
-        type: DataTypes.STRING,
-        allowNull: false
+    est_admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     },
-
-    mot_de_passe : {
-        type: DataTypes.STRING,
-        allowNull: false
+  },
+  {
+    sequelize,
+    modelName: 'utilisateurs',
+    hooks: {
+      beforeCreate: async (utilisateur) => {
+        await utilisateur.setPassword(utilisateur.mot_de_passe);
+      },
+      beforeUpdate: async (utilisateur) => {
+        await utilisateur.setPassword(utilisateur.mot_de_passe);
+      },
     },
+  },
+);
 
-    est_admin : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-
-    est_eleve : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-
-    est_patient : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-
-})
-
-module.exports = Utilisateurs
+module.exports = Utilisateurs;
