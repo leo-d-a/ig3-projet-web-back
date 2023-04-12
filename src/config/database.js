@@ -1,10 +1,9 @@
 const { Sequelize } = require('sequelize')
-const pwd = require('C:/Users/Léo/credentials.js')
 
 const username = process.env.DB_USERNAME || 'postgres'
 const password = process.env.DB_PASSWORD || '1234'
 const host = process.env.DB_HOST || 'localhost'
-const database = process.env.DB_NAME || 'projetweb'
+const database = process.env.DB_NAME || 'postgres'
 const port = process.env.DB_PORT || 5432
 
 const sequelize = new Sequelize(database, username, password, {
@@ -14,6 +13,12 @@ const sequelize = new Sequelize(database, username, password, {
     logging: false,
 })
 
-console.log('Connection to database has been established successfully.')
+sequelize.authenticate()
+  .then(() =>{
+    console.log("Database connection established")
+  })
+  .catch(err =>{
+    console.log("error: " + err)
+  })
 
 module.exports = sequelize

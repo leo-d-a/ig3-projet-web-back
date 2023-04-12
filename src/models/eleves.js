@@ -1,7 +1,7 @@
 const DataTypes = require('sequelize');
 const sequelize = require('../config/database')
 
-const Eleves = sequelize.define('eleves', {
+const Eleves = sequelize.define('Eleves', {
 
     id_eleve: {
         type: DataTypes.UUID,
@@ -26,8 +26,12 @@ const Eleves = sequelize.define('eleves', {
 
     profession_sante : {
         type: DataTypes.STRING,
-    },
+    }
 
-})
+},
+
+{ tableName: "Eleves", freezeTableName: true, timestamps: false}
+
+)
 
 module.exports = Eleves

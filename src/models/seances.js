@@ -1,9 +1,9 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const DataTypes = require('sequelize');
+const sequelize = require('../config/database')
 
-const Formations = sequelize.define('Formations', {
+const Seances = sequelize.define('Seances', {
 
-    id_formation: {
+    id_seance: {
         type: DataTypes.UUID,
         defaultValue : DataTypes.UUIDV4,
         primaryKey: true,
@@ -17,7 +17,6 @@ const Formations = sequelize.define('Formations', {
 
     description: {
         type: DataTypes.STRING,
-        allowNull: false
     },
 
     date_debut: {
@@ -40,14 +39,6 @@ const Formations = sequelize.define('Formations', {
         type: DataTypes.STRING,
     },
 
-    nb_places: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate : {
-            isNumeric: true
-        }
-    },
-
     est_deplace : {
         type: DataTypes.BOOLEAN,
         allowNull: false,
@@ -67,11 +58,12 @@ const Formations = sequelize.define('Formations', {
             isBoolean: true
         }
     }
-
 },
 
-{ tableName: "Formations", freezeTableName: true, timestamps: false}
+{ tableName: "Seances", freezeTableName: true, timestamps: false }
 
-)
+);
 
-module.exports = Formations
+
+
+module.exports = Seances

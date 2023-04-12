@@ -1,24 +1,31 @@
 const DataTypes = require('sequelize');
 const sequelize = require('../config/database');
-const { validate } = require('uuid');
+// const Formations = require('./formations');
+// const Eleves = require('./eleves');
 
-const InscriptionsFormations = sequelize.define('inscriptionsFormations', {
+const InscriptionsFormations = sequelize.define('InscriptionsFormations', {
 
     id_formation: {
         type: DataTypes.UUID,
         defaultValue : DataTypes.UUIDV4,
-        primaryKey : true,
+        // references: {
+        //     model: Formations,
+        //     key: 'id_formation'
+        // },
         allowNull: false
     },
 
     id_eleve: {
         type: DataTypes.UUID,
         defaultValue : DataTypes.UUIDV4,
-        primaryKey : true,
+        // references: {
+        //     model: Eleves,
+        //     key: 'id_eleve'
+        // },
         allowNull: false
     },
 
-    cree_le : {
+    creee_le : {
         type: DataTypes.DATE,
         allowNull: false,
         validate : {
@@ -26,7 +33,19 @@ const InscriptionsFormations = sequelize.define('inscriptionsFormations', {
         }
     },
 
-})
+    est_valide : {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate : {
+            isBoolean: true
+        }
+    }
+
+},
+
+{ tableName: "InscriptionsFormations", freezeTableName: true, timestamps: false}
+
+)
 
 module.exports = InscriptionsFormations
 

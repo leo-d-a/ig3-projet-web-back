@@ -1,9 +1,27 @@
 const Formations = require('../models/models')
 
-exports.creerFormation = async (req, res)=>{ 
-    const { name, description, startDate, endDate } = req.body 
-    if (!name || !description || !startDate || !endDate) {
-        res.status(400).send("Missing required fields")
-    }
-    res.status(200).send(`This is ${name}, ${description}, it starts on ${startDate} and end on ${endDate}`) 
-}
+// exports.creerFormation = async (req, res) => {
+//     const { titre, description, date_debut, date_fin, nb_places } = req.body
+
+//     try {
+//         const formation = await Formations.create({
+//             titre,
+//             description,
+//             date_debut,
+//             date_fin,
+//             nb_places
+//         })
+
+//         res.status(201).json({ formation })
+//     }
+// }
+
+// exports.modifFormation = async (req, res)=>{
+
+// exports.supprFormation = async (req, res)=>{
+
+// exports.afficherFormations = async (req, res)=>{
+
+// exports.afficherFormationParId = async (req, res)=>{
+
+// exports.afficherFormationParTitre = async (req, res)=>{

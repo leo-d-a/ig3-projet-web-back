@@ -1,30 +1,29 @@
 const DataTypes = require('sequelize');
 const sequelize = require('../config/database')
 
-const Patients = sequelize.define('Patients', {
+const InscriptionsSeances = sequelize.define('InscriptionsSeances', {
 
     id_patient: {
         type: DataTypes.UUID,
         defaultValue : DataTypes.UUIDV4,
-        primaryKey: true,
         allowNull: false,
     },
 
-    id_utilisateur: {
+    id_seance: {
         type: DataTypes.UUID,
         defaultValue : DataTypes.UUIDV4,
         allowNull: false
     },
 
-    motif_consult : {
+    creee_le : {
         type: DataTypes.STRING,
     }
 },
 
-{ tableName: "Patients", freezeTableName: true, timestamps: false }
+{ tableName: "InscriptionsSeances", freezeTableName: true, timestamps: false }
 
 );
 
 
 
-module.exports = Patients
+module.exports = InscriptionsSeances

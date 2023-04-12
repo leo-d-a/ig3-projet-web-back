@@ -1,21 +1,21 @@
-const bcrypt = require('bcrypt');
-const { Model, DataTypes } = require('sequelize');
+//const bcrypt = require('bcrypt');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-class Utilisateurs extends Model {
-  async setPassword(password) {
-    const saltRounds = 10;
-    this.mot_de_passe = await bcrypt.hash(password, saltRounds);
-  }
+// class Utilisateurs extends Model {
+//   async setPassword(password) {
+//     const saltRounds = 10;
+//     this.mot_de_passe = await bcrypt.hash(password, saltRounds);
+//   }
 
-  async checkPassword(password) {
-    return bcrypt.compare(password, this.mot_de_passe);
-  }
-}
+//   async checkPassword(password) {
+//     return bcrypt.compare(password, this.mot_de_passe);
+//   }
+// }
 
-Utilisateurs.init(
+const Utilisateurs = sequelize.define('Utilisateurs',
   {
-    id: {
+    id_utilisateur : {
         type: DataTypes.UUID,
         defaultValue : DataTypes.UUIDV4,
         primaryKey: true,
@@ -69,20 +69,23 @@ Utilisateurs.init(
     est_admin: {
       type: DataTypes.BOOLEAN,
       allowNull: false
-    },
+    }
   },
-  {
-    sequelize,
-    modelName: 'utilisateurs',
-    hooks: {
-      beforeCreate: async (utilisateur) => {
-        await utilisateur.setPassword(utilisateur.mot_de_passe);
-      },
-      beforeUpdate: async (utilisateur) => {
-        await utilisateur.setPassword(utilisateur.mot_de_passe);
-      },
-    },
-  },
+
+  { tableName: "Utilisateurs", freezeTableName: true, timestamps: false}
+
+  // {
+  //   sequelize,
+  //   modelName: 'utilisateurs',
+  //   hooks: {
+  //     beforeCreate: async (utilisateur) => {
+  //       await utilisateur.setPassword(utilisateur.mot_de_passe);
+  //     },
+  //     beforeUpdate: async (utilisateur) => {
+  //       await utilisateur.setPassword(utilisateur.mot_de_passe);
+  //     },
+  //   },
+  // },
 );
 
 module.exports = Utilisateurs;
