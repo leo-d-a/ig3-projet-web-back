@@ -27,8 +27,8 @@ Patients.hasMany(InscriptionsSeances, {foreignKey: 'id_patient', allowNull: fals
 InscriptionsSeances.belongsTo(Patients, {foreignKey: 'id_patient'});
 
 //Clé étrangère Seances / InscriptionsSeances
-Seances.hasMany(InscriptionsSeances, {foreignKey: 'id_seance', allowNull: false, onDelete: 'CASCADE'})
-InscriptionsSeances.belongsTo(Seances, {foreignKey: 'id_seance'});
+// Seances.hasMany(InscriptionsSeances, {foreignKey: 'id_seance', allowNull: false, onDelete: 'CASCADE'})
+// InscriptionsSeances.belongsTo(Seances, {foreignKey: 'id_seance'});
 
 Utilisateurs.sync({alter : true}).then(() => {
     console.log('Table Utilisateurs créée')
@@ -51,6 +51,8 @@ Utilisateurs.sync({alter : true}).then(() => {
         })
     })
 })
+
+
 
 
 
