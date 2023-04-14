@@ -1,6 +1,7 @@
 const express = require('express')
 const helmet = require('helmet')
-const Utilisateurs = require('./models/models')
+const { Utilisateurs, Patients, Eleves, InscriptionsFormations, InscriptionsSeances, Seances, Formations } = require('./models/models')
+
 
 
 const app = express()

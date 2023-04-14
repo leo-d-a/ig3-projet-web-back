@@ -1,31 +1,29 @@
 const express = require('express')
 const router = express.Router()
 
-router.get("/", (req, res)=>{ res.status(200).send("Formation Route") })
+// Routes pour toutes les formations
+router.route("/formations")
+  .get(getAllFormations) // Done // obtenir toutes les formations
+  .post(createFormation) // Done // créer une nouvelle formation
 
-router.post("/", (req, res)=>{ 
-    const { name, description, startDate, endDate } = req.body 
-    if (!name || !description || !startDate || !endDate) {
-        res.status(400).send("Missing required fields")
-    }
-    res.status(200).send(`This is ${name}, ${description}, it starts on ${startDate} and end on ${endDate}`) 
-})
+// Routes pour une formation spécifique
+router.route("/formations/:id")
+  .get(getFormationById) // Done // obtenir une formation par son id
+  .put(updateFormationById) // Done // mettre à jour une formation par son id
+  .delete(deleteFormationById) // Done // supprimer une formation par son id
 
-router.put("/description/:id", (req, res)=> { 
-    const { id } = req.params
-    const { description } = req.body
-    if ( !id || isNaN(id) || !description ) {
-        res.status(400).send("Please provide a valid id and a description")
-    }
-    res.status(200).send("The description has been modified")
-})
+// Routes pour filtrer les formations par libellé et compétences
+router.route("/formations/libelle/:libelle")
+  .get(getFormationsByLibelle) // Done // obtenir toutes les formations ayant un certain libellé
 
-router.delete("/:id", (req, res)=> {
-    const { id } = req.params
-    if ( !id || isNaN(id) ) {
-        res.status(400).send("Please provide a valid id")
-    }
-    res.status(200).send("No more ")
-})
+router.route("/formations/competences/:competences")
+  .get(getFormationsByCompetences) // Done // obtenir toutes les formations ayant certaines compétences
+
+router.route("/formations/:id/est_deplacee")
+  .put(updateDeplaceeById) // Done // mettre à jour si une formation a été déplacée ou non par son id
+
+router.route("/formations/:id/est_annulee")
+  .put(updateAnnuleeById) // Done // mettre à jour si une formation a été annulée ou non par son id
+
 
 module.exports = router

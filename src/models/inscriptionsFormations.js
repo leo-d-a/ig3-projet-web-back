@@ -8,20 +8,12 @@ const InscriptionsFormations = sequelize.define('InscriptionsFormations', {
     id_formation: {
         type: DataTypes.UUID,
         defaultValue : DataTypes.UUIDV4,
-        // references: {
-        //     model: Formations,
-        //     key: 'id_formation'
-        // },
         allowNull: false
     },
 
     id_eleve: {
         type: DataTypes.UUID,
         defaultValue : DataTypes.UUIDV4,
-        // references: {
-        //     model: Eleves,
-        //     key: 'id_eleve'
-        // },
         allowNull: false
     },
 
@@ -30,6 +22,18 @@ const InscriptionsFormations = sequelize.define('InscriptionsFormations', {
         allowNull: false,
         validate : {
             isDate: true
+        },
+    },
+
+    est_confirme : {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+    },
+
+    est_present : {
+        type: DataTypes.BOOLEAN,
+        validate : {
+            isBoolean: true
         }
     },
 

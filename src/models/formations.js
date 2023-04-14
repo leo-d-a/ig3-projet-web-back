@@ -36,8 +36,8 @@ const Formations = sequelize.define('Formations', {
         }
     },  
 
-    lieu: {
-        type: DataTypes.STRING,
+    prix : {
+        type: DataTypes.FLOAT,  
     },
 
     nb_places: {
@@ -48,7 +48,7 @@ const Formations = sequelize.define('Formations', {
         }
     },
 
-    est_deplace : {
+    est_deplacee : {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         validate : {
@@ -56,17 +56,10 @@ const Formations = sequelize.define('Formations', {
         }
     },
 
-    est_annule : {
+    est_annulee : {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },  
-
-    est_present : {
-        type: DataTypes.BOOLEAN,
-        validate : {
-            isBoolean: true
-        }
-    }
 
 },
 

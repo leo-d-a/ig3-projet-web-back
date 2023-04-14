@@ -1,8 +1,8 @@
 //const bcrypt = require('bcrypt');
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/database');
 
-// class Utilisateurs extends Model {
+// class Utilisateurs_cl extends Model {
 //   async setPassword(password) {
 //     const saltRounds = 10;
 //     this.mot_de_passe = await bcrypt.hash(password, saltRounds);
@@ -72,7 +72,7 @@ const Utilisateurs = sequelize.define('Utilisateurs',
     }
   },
 
-  { tableName: "Utilisateurs", freezeTableName: true, timestamps: false}
+  { tableName: "Utilisateurs", freezeTableName: true, timestamps: false},
 
   // {
   //   sequelize,
@@ -87,5 +87,7 @@ const Utilisateurs = sequelize.define('Utilisateurs',
   //   },
   // },
 );
+
+
 
 module.exports = Utilisateurs;

@@ -35,10 +35,6 @@ const Seances = sequelize.define('Seances', {
         }
     },  
 
-    lieu: {
-        type: DataTypes.STRING,
-    },
-
     est_deplace : {
         type: DataTypes.BOOLEAN,
         allowNull: false,
