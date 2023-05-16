@@ -1,37 +1,32 @@
-const DataTypes = require('sequelize');
-const sequelize = require('../config/database')
+const { DataTypes, Model } = require('sequelize');
+const sequelize = require('../config/database');
 
-const Eleves = sequelize.define('Eleves', {
+class Eleve extends Model {}
 
-    id_eleve: {
-        type: DataTypes.UUID,
-        defaultValue : DataTypes.UUIDV4,
-        primaryKey: true,
-        allowNull: false,
+Eleve.init(
+  {
+    idUtilisateur: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
     },
-
-    id_utilisateur: {
-        type: DataTypes.UUID,
-        defaultValue : DataTypes.UUIDV4,
-        allowNull: false
+    parcours: {
+      type: DataTypes.STRING,
     },
-
-    parcours : {
-        type: DataTypes.STRING,
+    niveauActuel: {
+      type: DataTypes.STRING,
     },
-
-    niveau_actuel : {
-        type: DataTypes.STRING,
+    professionSante: {
+      type: DataTypes.STRING,
     },
+  },
+  {
+    sequelize,
+    modelName: 'Eleve',
+    tableName: 'Eleves',
+    timestamps: true,
+  }
+);
 
-    profession_sante : {
-        type: DataTypes.STRING,
-    }
-
-},
-
-{ tableName: "Eleves", freezeTableName: true, timestamps: false}
-
-)
-
-module.exports = Eleves
+module.exports = Eleve;

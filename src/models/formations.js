@@ -1,70 +1,59 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Formations = sequelize.define('Formations', {
+class Formation extends Model {}
 
-    id_formation: {
-        type: DataTypes.UUID,
-        defaultValue : DataTypes.UUIDV4,
-        primaryKey: true,
-        allowNull: false,
+Formation.init(
+  {
+    idFormation: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
     },
-
     libelle: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
-
     description: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
     },
-
-    date_debut: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        validate : {
-            isDate: true
-        }
+    dateDebut: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      validate: {
+        isDate: true,
+      },
     },
-
-    date_fin: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        validate : {
-            isDate: true
-        }
-    },  
-
-    prix : {
-        type: DataTypes.FLOAT,  
+    dateFin: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      validate: {
+        isDate: true,
+      },
     },
-
-    nb_places: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        validate : {
-            isNumeric: true
-        }
+    prix: {
+      type: DataTypes.FLOAT,
     },
-
-    est_deplacee : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        validate : {
-            isBoolean: true
-        }
+    nbPlaces: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isNumeric: true,
+      },
     },
+    estAnnulee: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+  },
+  {
+    sequelize,
+    modelName: 'Formation',
+    tableName: 'Formations',
+    timestamps: false,
+  }
+);
 
-    est_annulee : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },  
-
-},
-
-{ tableName: "Formations", freezeTableName: true, timestamps: false}
-
-)
-
-module.exports = Formations
+module.exports = Formation;

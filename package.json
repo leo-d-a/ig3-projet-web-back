@@ -26,9 +26,11 @@
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.30.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "vuetify": "^3.2.2"
   },
   "devDependencies": {
+    "@mdi/font": "^7.2.96",
     "sequelize-cli": "^6.6.0"
   }
 }

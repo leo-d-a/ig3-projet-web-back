@@ -1,59 +1,42 @@
-const Utilisateurs = require('./utilisateurs')
-const Eleves = require('./eleves')
-const Patients = require('./patients')
-const InscriptionsFormations = require('./inscriptionsFormations')
-const Formations = require('./formations')
-const InscriptionsSeances = require('./inscriptionsSeances')
-const Seances = require('./seances')
+const Utilisateurs = require('./utilisateurs');
+const Eleves = require('./eleves');
+const Patients = require('./patients');
+const InscriptionsFormations = require('./inscriptionsFormations');
+const Formations = require('./formations');
+const Avis = require('./avis');
+const sequelize = require('../config/database');
 
-//Clé étrangère Utilisateurs / Eleves
-Utilisateurs.hasOne(Eleves, {foreignKey: 'id_utilisateur', allowNull: false, onDelete: 'CASCADE'})
-Eleves.belongsTo(Utilisateurs, {foreignKey: 'id_utilisateur'})
+// Associations entre les tables
+Utilisateurs.hasOne(Eleves, { foreignKey: 'idUtilisateur', allowNull: false, onDelete: 'CASCADE' });
+Eleves.belongsTo(Utilisateurs, { foreignKey: 'idUtilisateur' });
 
-//Clé étrangère Utilisateurs / Patients
-Utilisateurs.hasOne(Patients, {foreignKey: 'id_utilisateur', allowNull: false, onDelete: 'CASCADE'})
-Patients.belongsTo(Utilisateurs, {foreignKey: 'id_utilisateur'})
+Utilisateurs.hasOne(Patients, { foreignKey: 'idUtilisateur', allowNull: false, onDelete: 'CASCADE' });
+Patients.belongsTo(Utilisateurs, { foreignKey: 'idUtilisateur' });
 
-//Clé étrangère Eleves / InscriptionsFormations
-Eleves.hasMany(InscriptionsFormations, {foreignKey: 'id_eleve', allowNull: false, onDelete: 'CASCADE'})
-InscriptionsFormations.belongsTo(Eleves, {foreignKey: 'id_eleve'})
+Eleves.hasMany(InscriptionsFormations, { foreignKey: 'idEleve', allowNull: false, onDelete: 'CASCADE' });
+InscriptionsFormations.belongsTo(Eleves, { foreignKey: 'idEleve' });
 
-//Clé étrangère Formations / InscriptionsFormations
-Formations.hasMany(InscriptionsFormations, {foreignKey: 'id_formation', allowNull: false, onDelete: 'CASCADE'})
-InscriptionsFormations.belongsTo(Formations, {foreignKey: 'id_formation'});
+Formations.hasMany(InscriptionsFormations, { foreignKey: 'idFormation', allowNull: false, onDelete: 'CASCADE' });
+InscriptionsFormations.belongsTo(Formations, { foreignKey: 'idFormation' });
 
-//Clé étrangère Patients / InscriptionsSeances
-Patients.hasMany(InscriptionsSeances, {foreignKey: 'id_patient', allowNull: false, onDelete: 'CASCADE'})
-InscriptionsSeances.belongsTo(Patients, {foreignKey: 'id_patient'});
+// Association pour la table Avis
+Eleves.hasMany(Avis, { foreignKey: 'idEleve', allowNull: false, onDelete: 'CASCADE' });
+Avis.belongsTo(Eleves, { foreignKey: 'idEleve' });
 
-//Clé étrangère Seances / InscriptionsSeances
-// Seances.hasMany(InscriptionsSeances, {foreignKey: 'id_seance', allowNull: false, onDelete: 'CASCADE'})
-// InscriptionsSeances.belongsTo(Seances, {foreignKey: 'id_seance'});
+Formations.hasMany(Avis, { foreignKey: 'idFormation', allowNull: false, onDelete: 'CASCADE' });
+Avis.belongsTo(Formations, { foreignKey: 'idFormation' });
 
-Utilisateurs.sync({alter : true}).then(() => {
-    console.log('Table Utilisateurs créée')
-    Patients.sync({alter : true}).then(() => {
-        console.log('Table Patients créée')
-        Formations.sync({alter : true}).then(() => {
-            console.log('Table Formations créée')
-            Eleves.sync({alter : true}).then(() => {
-                console.log('Table Eleves créée')
-                InscriptionsFormations.sync({alter : true}).then(() => {
-                    console.log('Table InsriptionsFormations créée')
-                    InscriptionsSeances.sync({alter : true}).then(() => {
-                        console.log('Table InscriptionsSeances créée')
-                        Seances.sync({alter : true}).then(() => {
-                            console.log('Table Seances créée')
-                        })
-                    })
-                })
-            })
-        })
-    })
-})
+// Synchronisation des tables avec la base de données
+sequelize.sync()
+  .then(() => console.log('Tables synchronisées'))
+  .catch(error => console.log('Erreur lors de la synchronisation:', error));
 
-
-
-
-
-module.exports = {Utilisateurs, Eleves, Patients, InscriptionsFormations, Formations, InscriptionsSeances, Seances}
+// Export des modèles
+module.exports = {
+  Utilisateurs,
+  Eleves,
+  Patients,
+  Formations,
+  InscriptionsFormations,
+  Avis
+};

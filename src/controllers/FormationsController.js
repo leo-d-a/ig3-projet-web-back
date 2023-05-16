@@ -1,4 +1,4 @@
-const { where } = require('sequelize');
+const Sequelize = require('sequelize');
 const Formations = require('../models/models')
 
 exports.getAllFormations = async (req, res) => {
@@ -7,7 +7,7 @@ exports.getAllFormations = async (req, res) => {
 };
 
 exports.getFormationById = async (req, res) => {
-    const formation = await Formations.findByPk(req.params.id);
+    const formation = await Formations.findByPk(req.params.id_formation);
 
     if (formation) {
         res.json(formation);
@@ -105,7 +105,7 @@ exports.updateDeplaceeById = async (req, res) => {
     }
 };
 
-//updateAnnuleeById avec try catch
+//updateAnnuleeById 
 
 exports.updateAnnuleeById = async (req, res) => {
     const id_formation = req.params.id;

@@ -1,30 +1,26 @@
-const DataTypes = require('sequelize');
-const sequelize = require('../config/database')
+const { DataTypes, Model } = require('sequelize');
+const sequelize = require('../config/database');
 
-const Patients = sequelize.define('Patients', {
+class Patient extends Model {}
 
-    id_patient: {
-        type: DataTypes.UUID,
-        defaultValue : DataTypes.UUIDV4,
-        primaryKey: true,
-        allowNull: false,
+Patient.init(
+  {
+    idUtilisateur: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
     },
-
-    id_utilisateur: {
-        type: DataTypes.UUID,
-        defaultValue : DataTypes.UUIDV4,
-        allowNull: false
+    motifConsultation: {
+      type: DataTypes.STRING,
     },
-
-    motif_consult : {
-        type: DataTypes.STRING,
-    }
-},
-
-{ tableName: "Patients", freezeTableName: true, timestamps: false }
-
+  },
+  {
+    sequelize,
+    modelName: 'Patient',
+    tableName: 'Patients',
+    timestamps: false,
+  }
 );
 
-
-
-module.exports = Patients
+module.exports = Patient;

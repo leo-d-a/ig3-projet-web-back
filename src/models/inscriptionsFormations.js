@@ -1,55 +1,49 @@
-const DataTypes = require('sequelize');
-const sequelize = require('../config/database');
-// const Formations = require('./formations');
-// const Eleves = require('./eleves');
+const { DataTypes, Model } = require('sequelize');
+const sequelize = require('../database');
 
-const InscriptionsFormations = sequelize.define('InscriptionsFormations', {
+class InscriptionFormation extends Model {}
 
-    id_formation: {
-        type: DataTypes.UUID,
-        defaultValue : DataTypes.UUIDV4,
-        allowNull: false
+InscriptionFormation.init(
+  {
+    idInscription: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
     },
-
-    id_eleve: {
-        type: DataTypes.UUID,
-        defaultValue : DataTypes.UUIDV4,
-        allowNull: false
+    dateInscription: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true,
+      },
     },
-
-    creee_le : {
-        type: DataTypes.DATE,
-        allowNull: false,
-        validate : {
-            isDate: true
-        },
+    estAnnulee: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
-
-    est_confirme : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
+    estPresente: {
+      type: DataTypes.BOOLEAN,
+      validate: {
+        isBoolean: true,
+      },
     },
-
-    est_present : {
-        type: DataTypes.BOOLEAN,
-        validate : {
-            isBoolean: true
-        }
+    estValidee: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+      validate: {
+        isBoolean: true,
+      },
     },
+  },
+  {
+    sequelize,
+    modelName: 'InscriptionFormation',
+    tableName: 'InscriptionsFormations',
+    timestamps: false,
+  }
+);
 
-    est_valide : {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        validate : {
-            isBoolean: true
-        }
-    }
-
-},
-
-{ tableName: "InscriptionsFormations", freezeTableName: true, timestamps: false}
-
-)
-
-module.exports = InscriptionsFormations
-
+module.exports = InscriptionFormation;
