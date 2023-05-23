@@ -6,6 +6,7 @@ const host = process.env.DB_HOST || 'localhost'
 const database = process.env.DB_NAME || 'postgres'
 const port = process.env.DB_PORT || 5432
 
+console.log('Configuring Sequelize...');
 const sequelize = new Sequelize(database, username, password, {
     host,
     port,

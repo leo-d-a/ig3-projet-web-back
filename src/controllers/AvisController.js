@@ -1,111 +1,61 @@
-const { Avis } = require('../models/models');
+const handleErrors = require('../helpers/handleErrors');
+const Avis = require('../models/avis');
 
-// Obtenir tous les avis
-const getAllAvis = async (req, res) => {
-    try {
-        const avis = await Avis.findAll();
-        res.json(avis);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
+exports.createAvis = async (req, res) => {
+  const [err, avis] = await handleErrors(Avis.create(req.body));
+  if (err) {
+    return res.status(400).json({ error: err.message });
+  }
+  res.status(201).json(avis);
 };
 
-const createAvis = async (req, res) => {
-    try {
-        const avis = await Avis.create(req.body);
-        res.status(201).json(avis);
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-}
-
-const getAvisById = async (req, res) => {
-    try {
-        const avis = await Avis.findByPk(req.params.id);
-        if (avis) {
-            res.json(avis);
-        } else {
-            res.status(404).json({ error: 'Avis non trouvé' });
-        }
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-}
-
-const updateAvisById = async (req, res) => {
-    try {
-        const avis = await Avis.findByPk(req.params.id);
-        if (avis) {
-            await avis.update(req.body);
-            res.json(avis);
-        } else {
-            res.status(404).json({ error: 'Avis non trouvé' });
-        }
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-}
-
-const deleteAvisById = async (req, res) => {
-    try {
-        const avis = await Avis.findByPk(req.params.id);
-        if (avis) {
-            await avis.destroy();
-            res.sendStatus(204);
-        } else {
-            res.status(404).json({ error: 'Avis non trouvé' });
-        }
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-}
-
-const getAvisByIdEleve = async (req, res) => {
-    try {
-        const avis = await Avis.findAll({
-            where: {
-                id_eleve: req.params.id_eleve
-            }
-        });
-        if (avis) {
-            res.json(avis);
-        } else {
-            res.status(404).json({ error: 'Avis non trouvé' });
-        }
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-}
-
-const getAvisByIdFormation = async (req, res) => {
-    try {
-        const avis = await Avis.findAll({
-            where: {
-                id_formation: req.params.id_formation
-            }
-        });
-        if (avis) {
-            res.json(avis);
-        } else {
-            res.status(404).json({ error: 'Avis non trouvé' });
-        }
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-}
-
-module.exports = { 
-    getAllAvis,
-    createAvis,
-    getAvisById,
-    updateAvisById,
-    deleteAvisById,
-    getAvisByIdEleve,
-    getAvisByIdFormation
+exports.getAvis = async (_, res) => {
+  const [err, avis] = await handleErrors(Avis.findAll());
+  if (err) {
+    return res.status(500).json({ error: err.message });
+  }
+  res.status(200).json(avis);
 };
 
+exports.getAvisById = async (req, res) => {
+  const [err, avis] = await handleErrors(Avis.findByPk(req.params.id));
+  if (err) {
+    return res.status(500).json({ error: err.message });
+  }
+  if (!avis) {
+    return res.status(404).json({ error: 'Avis not found' });
+  }
+  res.status(200).json(avis);
+};
 
+exports.updateAvis = async (req, res) => {
+  const [findErr, avis] = await handleErrors(Avis.findByPk(req.params.id));
+  if (findErr) {
+    return res.status(500).json({ error: findErr.message });
+  }
+  if (!avis) {
+    return res.status(404).json({ error: 'Avis not found' });
+  }
 
+  const [updateErr] = await handleErrors(avis.update(req.body));
+  if (updateErr) {
+    return res.status(500).json({ error: updateErr.message });
+  }
+  res.status(200).json(avis);
+};
 
+exports.deleteAvis = async (req, res) => {
+  const [findErr, avis] = await handleErrors(Avis.findByPk(req.params.id));
+  if (findErr) {
+    return res.status(500).json({ error: findErr.message });
+  }
+  if (!avis) {
+    return res.status(404).json({ error: 'Avis not found' });
+  }
 
-
+  const [deleteErr] = await handleErrors(avis.destroy());
+  if (deleteErr) {
+    return res.status(500).json({ error: deleteErr.message });
+  }
+  res.status(204).json({});
+};
