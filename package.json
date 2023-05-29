@@ -35,6 +35,8 @@
   },
   "devDependencies": {
     "@mdi/font": "^7.2.96",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.3.0",
     "sequelize-cli": "^6.6.0"
   }
 }
