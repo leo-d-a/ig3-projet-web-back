@@ -15,7 +15,4 @@ const Patient = sequelize.define('Patient', {
   },
 });
 
-Patient.belongsTo(Utilisateur);
-Utilisateur.hasOne(Patient);
-
 module.exports = Patient;

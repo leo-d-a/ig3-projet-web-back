@@ -1,11 +1,9 @@
-const { DataTypes, Model } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const Eleve = require('./eleve');
 const Formation = require('./formation');
 
-class InscriptionFormation extends Model {}
-
-InscriptionFormation.init({
+const InscriptionFormation = sequelize.define('InscriptionFormation',{
   idInscription: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -33,16 +31,6 @@ InscriptionFormation.init({
     allowNull: false,
     defaultValue: false,
   },
-},{
-  sequelize,
-  modelName: 'InscriptionFormation',
-  tableName: 'InscriptionsFormations',
-  timestamps: false,
 });
-
-InscriptionFormation.belongsTo(Eleve);
-InscriptionFormation.belongsTo(Formation);
-Eleve.hasMany(InscriptionFormation);
-Formation.hasMany(InscriptionFormation);
 
 module.exports = InscriptionFormation;

@@ -31,7 +31,4 @@ const Eleve = sequelize.define('Eleve', {
   },
 });
 
-Eleve.belongsTo(Utilisateur);
-Utilisateur.hasOne(Eleve);
-
 module.exports = Eleve;

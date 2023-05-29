@@ -28,9 +28,5 @@ const Avis = sequelize.define('Avis', {
   },
 });
 
-Avis.belongsTo(Eleve);
-Avis.belongsTo(Formation);
-Eleve.hasMany(Avis);
-Formation.hasMany(Avis);
 
 module.exports = Avis;
