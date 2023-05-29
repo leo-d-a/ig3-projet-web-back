@@ -7,8 +7,6 @@ const inscriptionFormationRoutes = require('./routes/inscriptionFormationRoutes'
 const patientRoutes = require('./routes/patientRoutes');
 const utilisateurRoutes = require('./routes/utilisateurRoutes');
 const cookieParser = require("cookie-parser");
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('database', 'username', 'password', { dialect: 'postgres' });
 
 const Utilisateur = require('./models/utilisateur');
 const Patient = require('./models/patient');
