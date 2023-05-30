@@ -8,17 +8,10 @@ const patientRoutes = require('./routes/patientRoutes');
 const utilisateurRoutes = require('./routes/utilisateurRoutes');
 const cookieParser = require("cookie-parser");
 
-const Utilisateur = require('./models/utilisateur');
-const Patient = require('./models/patient');
-const Eleve = require('./models/eleve');
-const Avis = require('./models/avis');
-const InscriptionFormation = require('./models/inscriptionFormation');
-const Formation = require('./models/formation');
-
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:false}));
 app.use(cors());
 app.use(cookieParser());
 
