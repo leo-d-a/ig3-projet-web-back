@@ -1,6 +1,5 @@
-const { DataTypes } = require('sequelize');
+/* const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const Utilisateur = require('./utilisateur');
 
 const Eleve = sequelize.define('Eleve', {
   eleveId: {
@@ -32,3 +31,4 @@ const Eleve = sequelize.define('Eleve', {
 });
 
 module.exports = Eleve;
+ */

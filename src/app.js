@@ -1,22 +1,24 @@
 const express = require('express');
 const cors = require('cors');
+
+// ROUTES
 const utilisateurRoutes = require('./routes/utilisateurRoutes');
-const eleveRoutes = require('./routes/eleveRoutes');
+/* const eleveRoutes = require('./routes/eleveRoutes');
 const patientRoutes = require('./routes/patientRoutes');
 const inscriptionFormationRoutes = require('./routes/inscriptionFormationRoutes');
 const avisRoutes = require('./routes/avisRoutes');
-const formationRoutes = require('./routes/formationRoutes');
+const formationRoutes = require('./routes/formationRoutes'); */
 
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors());
-app.use(cookieParser());
+// app.use(cookieParser());
 
-// RELATIONS
+/* // RELATIONS
 
 // Un utilisateur peut être un patient, un élève, ou les deux
 Utilisateur.hasOne(Patient, { foreignKey: 'utilisateurId' });
@@ -41,11 +43,11 @@ Avis.belongsTo(Formation, { foreignKey: 'formationId' });
 Avis.belongsTo(InscriptionFormation, { foreignKey: 'idInscription' });
 InscriptionFormation.hasOne(Avis, { foreignKey: 'idInscription' });
 
-app.use("/avis", avisRoutes);
-app.use("/eleves", eleveRoutes);
-app.use("/formations", formationRoutes);
-app.use("/inscriptions", inscriptionFormationRoutes);
-app.use("/patients", patientRoutes);
-app.use("/utilisateurs", utilisateurRoutes);
+/*app.use("/avis", avisRoutes);
+app.use("/eleve", eleveRoutes);
+app.use("/formation", formationRoutes);
+app.use("/inscription", inscriptionFormationRoutes);
+app.use("/patient", patientRoutes); */
+app.use("/utilisateur", utilisateurRoutes);
 
 module.exports = app;

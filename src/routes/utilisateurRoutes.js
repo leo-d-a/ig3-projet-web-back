@@ -1,21 +1,21 @@
 const express = require('express');
 const controller = require('../controllers/utilisateurController.js');
 const router = express.Router();
-const auth = require('../middleware/auth');
+// const auth = require('../middleware/auth');
 
 // GET REQUESTS
-router.get('/', auth, controller.getAll);
-router.get('/:id', auth, controller.getOne);
-router.get('/:id/eleve', auth, controller.getEleve);
-router.get('/:id/patient', auth, controller.getPatient);
+router.get('/', controller.getAll);
+router.get('/:id', controller.getOne);
+router.get('/:id/eleve', controller.getEleve);
+router.get('/:id/patient', controller.getPatient);
 
 // POST REQUEST
-router.post('/', auth, controller.create);
+router.post('/', controller.create);
 
 // PUT REQUEST
-router.put('/:id', auth, controller.update);
+router.put('/:id', controller.update);
 
 // DELETE REQUEST
-router.delete('/:id', auth, controller.delete);
+router.delete('/:id', controller.delete);
 
 module.exports = router;

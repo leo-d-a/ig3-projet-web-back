@@ -1,6 +1,6 @@
 const DataTypes = require('sequelize');
 const sequelize = require('../config/database');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 const Utilisateur = sequelize.define('Utilisateur', {
   utilisateurId: {
@@ -39,10 +39,10 @@ const Utilisateur = sequelize.define('Utilisateur', {
   motDePasse: {
     type: DataTypes.STRING,
     allowNull: false,
-    set(value) {
+    /* set(value) {
       const hash = bcrypt.hashSync(value, 10);
       this.setDataValue('motDePasse', hash);
-    },
+    }, */
     validate: {
       len: [8, 128],
     },

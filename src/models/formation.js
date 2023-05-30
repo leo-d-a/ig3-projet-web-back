@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+/* const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Formation = sequelize.define('Formation', {
@@ -31,10 +31,6 @@ const Formation = sequelize.define('Formation', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  nbPlacesRestantes: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
   estAnnulee: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
@@ -43,3 +39,4 @@ const Formation = sequelize.define('Formation', {
 });
 
 module.exports = Formation;
+ */

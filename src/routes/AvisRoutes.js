@@ -1,4 +1,4 @@
-const express = require('express');
+/* const express = require('express');
 const controller = require('../controllers/avisController');
 const router = express.Router();
 
@@ -18,3 +18,4 @@ router.put('/:id', controller.update);
 router.delete('/:id', controller.delete);
 
 module.exports = router;
+ */

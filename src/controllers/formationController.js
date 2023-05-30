@@ -1,4 +1,4 @@
-const Formation = require('../models/formation');
+/* const Formation = require('../models/formation');
 const Eleve = require('../models/eleve');
 
 exports.getAll = async (_, res) => {
@@ -36,8 +36,8 @@ exports.getInscrits = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { libelle, description, dateDébut, dateFin, prix, nbPlaces, nbPlacesRestantes, estAnnulee } = req.body;
-    const formation = await Formation.create({ libelle, description, dateDébut, dateFin, prix, nbPlaces, nbPlacesRestantes, estAnnulee });
+    const { libelle, description, dateDébut, dateFin, prix, nbPlaces, estAnnulee } = req.body;
+    const formation = await Formation.create({ libelle, description, dateDébut, dateFin, prix, nbPlaces, estAnnulee });
     res.status(201).json(formation);
   } catch (err) {
     return res.status(400).json({ error: err.message });
@@ -50,8 +50,8 @@ exports.update = async (req, res) => {
     if (!formation) {
       return res.status(404).json({ error: 'Formation not found' });
     }
-    const { libelle, description, dateDébut, dateFin, prix, nbPlaces, nbPlacesRestantes, estAnnulee } = req.body;
-    await formation.update({ libelle, description, dateDébut, dateFin, prix, nbPlaces, nbPlacesRestantes, estAnnulee });
+    const { libelle, description, dateDébut, dateFin, prix, nbPlaces, estAnnulee } = req.body;
+    await formation.update({ libelle, description, dateDébut, dateFin, prix, nbPlaces, estAnnulee });
     res.status(200).json(formation);
   } catch (err) {
     return res.status(500).json({ error: err.message });
@@ -108,3 +108,4 @@ exports.annulerInscription = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
+ */

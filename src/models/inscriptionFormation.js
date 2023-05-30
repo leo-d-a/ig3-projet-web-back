@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+/* const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const Eleve = require('./eleve');
 const Formation = require('./formation');
@@ -34,3 +34,4 @@ const InscriptionFormation = sequelize.define('InscriptionFormation',{
 });
 
 module.exports = InscriptionFormation;
+ */

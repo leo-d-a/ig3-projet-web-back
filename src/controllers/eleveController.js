@@ -1,4 +1,4 @@
-const Eleve = require('../models/eleve');
+/* const Eleve = require('../models/eleve');
 const Utilisateur = require('../models/utilisateur');
 
 exports.getAll = async (_, res) => {
@@ -102,3 +102,4 @@ exports.delete = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+ */

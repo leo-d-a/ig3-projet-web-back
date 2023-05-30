@@ -1,4 +1,4 @@
-const express = require('express');
+/* const express = require('express');
 const controller = require('../controllers/formationController');
 const router = express.Router();
 
@@ -19,3 +19,4 @@ router.delete('/:id', controller.delete);
 router.delete('/:id/inscription/:eleveId', controller.annulerInscription);
 
 module.exports = router;
+ */

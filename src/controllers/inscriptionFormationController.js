@@ -1,4 +1,4 @@
-const InscriptionFormation = require('../models/inscriptionFormation');
+/* const InscriptionFormation = require('../models/inscriptionFormation');
 const Formation = require('../models/formation');
 const Eleve = require('../models/eleve');
 
@@ -81,3 +81,4 @@ exports.delete = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
+ */

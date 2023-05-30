@@ -1,4 +1,4 @@
-const Avis = require('../models/avis');
+/* const Avis = require('../models/avis');
 const Eleve = require('../models/eleve');
 const Formation = require('../models/formation');
 
@@ -91,3 +91,4 @@ exports.delete = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+ */

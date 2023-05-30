@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+/* const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const Utilisateur = require('./utilisateur');
 
@@ -16,3 +16,4 @@ const Patient = sequelize.define('Patient', {
 });
 
 module.exports = Patient;
+ */
