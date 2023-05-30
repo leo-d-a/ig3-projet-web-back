@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const avisRoutes = require('./routes/avisRoutes');
-const eleveRoutes = require('./routes/eleveRoutes');
-const formationRoutes = require('./routes/formationRoutes');
-const inscriptionFormationRoutes = require('./routes/inscriptionFormationRoutes');
-const patientRoutes = require('./routes/patientRoutes');
-const utilisateurRoutes = require('./routes/utilisateurRoutes');
+const avisRoutes = require('../routes/avisRoutes');
+const eleveRoutes = require('../routes/eleveRoutes');
+const formationRoutes = require('../routes/formationRoutes');
+const inscriptionFormationRoutes = require('../routes/inscriptionFormationRoutes');
+const patientRoutes = require('../routes/patientRoutes');
+const utilisateurRoutes = require('../routes/utilisateurRoutes');
 const cookieParser = require("cookie-parser");
 
 const app = express();
