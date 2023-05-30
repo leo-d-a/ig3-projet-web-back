@@ -4,7 +4,7 @@ const utilisateurRoutes = require('./routes/utilisateurRoutes');
 const eleveRoutes = require('./routes/eleveRoutes');
 const patientRoutes = require('./routes/patientRoutes');
 const inscriptionFormationRoutes = require('./routes/inscriptionFormationRoutes');
-// const avisRoutes = require('./routes/avisRoutes');
+const avisRoutes = require('./routes/avisRoutes');
 const formationRoutes = require('./routes/formationRoutes');
 
 const cookieParser = require("cookie-parser");
@@ -29,7 +29,7 @@ Eleve.belongsTo(Utilisateur, { foreignKey: 'utilisateurId' });
 Eleve.belongsToMany(Formation, { through: InscriptionFormation, foreignKey: 'eleveId', otherKey: 'formationId' });
 Formation.belongsToMany(Eleve, { through: InscriptionFormation, foreignKey: 'formationId', otherKey: 'eleveId' });
 
-/* // Un élève peut avoir plusieurs avis
+// Un élève peut avoir plusieurs avis
 Eleve.hasMany(Avis, { foreignKey: 'eleveId' });
 Avis.belongsTo(Eleve, { foreignKey: 'eleveId' });
 
@@ -39,9 +39,9 @@ Avis.belongsTo(Formation, { foreignKey: 'formationId' });
 
 // Un avis est lié à une inscription à une formation (un élève ne peut avoir qu'un seul avis par formation)
 Avis.belongsTo(InscriptionFormation, { foreignKey: 'idInscription' });
-InscriptionFormation.hasOne(Avis, { foreignKey: 'idInscription' }); */
+InscriptionFormation.hasOne(Avis, { foreignKey: 'idInscription' });
 
-//app.use("/avis", avisRoutes);
+app.use("/avis", avisRoutes);
 app.use("/eleves", eleveRoutes);
 app.use("/formations", formationRoutes);
 app.use("/inscriptions", inscriptionFormationRoutes);
