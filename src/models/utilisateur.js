@@ -53,4 +53,8 @@ const Utilisateur = sequelize.define('Utilisateur', {
   },
 });
 
+Utilisateur.afterCreate((utilisateur, options) => {
+  console.log(`Utilisateur créé avec succès : ${utilisateur.utilisateurId}`);
+});
+
 module.exports = Utilisateur;

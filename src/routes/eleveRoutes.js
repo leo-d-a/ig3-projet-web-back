@@ -1,11 +1,10 @@
-/* const express = require('express');
+const express = require('express');
 const controller = require('../controllers/eleveController');
 const router = express.Router();
 
 // GET REQUESTS
 router.get('/', controller.getAll);
 router.get('/:id', controller.getOne);
-router.get('/:id/utilisateur', controller.getUtilisateur);
 router.get('/:id/formations', controller.getFormations);
 router.get('/:id/avis', controller.getAvis);
 
@@ -19,4 +18,3 @@ router.put('/:id', controller.update);
 router.delete('/:id', controller.delete);
 
 module.exports = router;
- */

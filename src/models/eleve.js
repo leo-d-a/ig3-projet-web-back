@@ -1,4 +1,4 @@
-/* const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Eleve = sequelize.define('Eleve', {
@@ -23,12 +23,10 @@ const Eleve = sequelize.define('Eleve', {
   },
   professionSante: {
     type: DataTypes.STRING,
-    allowNull: false,
     validate: {
-      len: [1, 100],
+      len: [0, 100],
     },
   },
 });
 
 module.exports = Eleve;
- */

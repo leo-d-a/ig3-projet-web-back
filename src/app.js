@@ -3,11 +3,17 @@ const cors = require('cors');
 
 // ROUTES
 const utilisateurRoutes = require('./routes/utilisateurRoutes');
-/* const eleveRoutes = require('./routes/eleveRoutes');
+const eleveRoutes = require('./routes/eleveRoutes');
+/* 
 const patientRoutes = require('./routes/patientRoutes');
 const inscriptionFormationRoutes = require('./routes/inscriptionFormationRoutes');
 const avisRoutes = require('./routes/avisRoutes');
 const formationRoutes = require('./routes/formationRoutes'); */
+
+// MODELS
+
+const Utilisateur = require('./models/utilisateur'); 
+const Eleve = require('./models/eleve');
 
 // const cookieParser = require("cookie-parser");
 
@@ -24,9 +30,6 @@ app.use(cors());
 Utilisateur.hasOne(Patient, { foreignKey: 'utilisateurId' });
 Patient.belongsTo(Utilisateur, { foreignKey: 'utilisateurId' });
 
-Utilisateur.hasOne(Eleve, { foreignKey: 'utilisateurId' });
-Eleve.belongsTo(Utilisateur, { foreignKey: 'utilisateurId' });
-
 // Un élève peut s'inscrire à plusieurs formations
 Eleve.belongsToMany(Formation, { through: InscriptionFormation, foreignKey: 'eleveId', otherKey: 'formationId' });
 Formation.belongsToMany(Eleve, { through: InscriptionFormation, foreignKey: 'formationId', otherKey: 'eleveId' });
@@ -41,13 +44,18 @@ Avis.belongsTo(Formation, { foreignKey: 'formationId' });
 
 // Un avis est lié à une inscription à une formation (un élève ne peut avoir qu'un seul avis par formation)
 Avis.belongsTo(InscriptionFormation, { foreignKey: 'idInscription' });
-InscriptionFormation.hasOne(Avis, { foreignKey: 'idInscription' });
+InscriptionFormation.hasOne(Avis, { foreignKey: 'idInscription' }); */
+
+Utilisateur.hasOne(Eleve, { foreignKey: 'utilisateurId' });
+Eleve.belongsTo(Utilisateur, { foreignKey: 'utilisateurId' });
+
 
 /*app.use("/avis", avisRoutes);
-app.use("/eleve", eleveRoutes);
+
 app.use("/formation", formationRoutes);
 app.use("/inscription", inscriptionFormationRoutes);
 app.use("/patient", patientRoutes); */
 app.use("/utilisateur", utilisateurRoutes);
+app.use("/eleve", eleveRoutes);
 
 module.exports = app;
