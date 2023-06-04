@@ -1,6 +1,8 @@
 const Utilisateur = require('../models/utilisateur');
 const Eleve = require('../models/eleve');
 const Patient = require('../models/patient');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 exports.getAll = async (_, res) => {
   try {
@@ -60,15 +62,46 @@ exports.getPatient = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  const { nom, prenom, sexe, dateNaissance, email, telephone, motDePasse, estAdmin } = req.body;
+  const { nom, prenom, sexe, dateNaissance, email, telephone, motDePasse } = req.body;
+
   try {
-    console.log('create appelé avec le corps de la requête : ', req.body);
-    const utilisateur = await Utilisateur.create({ nom, prenom, sexe, dateNaissance, email, telephone, motDePasse, estAdmin });
-    console.log(`Utilisateur créé : ${utilisateur.utilisateurId}`);
-    res.status(201).json(utilisateur);
-  } catch (err) {
-    console.log(`Erreur dans create : ${err.message}`);
-    return res.status(400).json({ error: err.message });
+    const newUser = await Utilisateur.create({
+      nom,
+      prenom,
+      sexe,
+      dateNaissance,
+      email,
+      telephone,
+      motDePasse
+    });
+
+    res.status(201).json({ message: 'Utilisateur créé avec succès', utilisateurId: newUser.utilisateurId });
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la création de l\'utilisateur' });
+  }
+};
+
+exports.login = async (req, res) => {
+  const { email, motDePasse } = req.body;
+
+  try {
+    const user = await Utilisateur.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+    }
+
+    const match = await bcrypt.compare(motDePasse, user.motDePasse);
+
+    if (!match) {
+      return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
+    }
+
+    const token = jwt.sign({ utilisateurId: user.utilisateurId }, 'JWT_SECRET', { expiresIn: '1h' }); // Remplacez 'secret_key' par votre clé secrète
+
+    res.status(200).json({ message: 'Connexion réussie', token });
+  } catch (error) {
+    res.status(500).json({ error: 'Erreur lors de la connexion' });
   }
 };
 

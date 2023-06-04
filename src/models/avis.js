@@ -1,12 +1,11 @@
-/* const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const Eleve = require('./eleve');
-const Formation = require('./formation');
 
 const Avis = sequelize.define('Avis', {
   avisId: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
     primaryKey: true,
   },
   note: {
@@ -26,8 +25,11 @@ const Avis = sequelize.define('Avis', {
     allowNull: false,
     defaultValue: DataTypes.NOW,
   },
+  idInscription: {
+    type: DataTypes.UUID,
+    allowNull: false
+  },
 });
 
 
 module.exports = Avis;
- */

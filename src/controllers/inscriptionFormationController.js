@@ -1,4 +1,4 @@
-/* const InscriptionFormation = require('../models/inscriptionFormation');
+const InscriptionFormation = require('../models/inscriptionFormation');
 const Formation = require('../models/formation');
 const Eleve = require('../models/eleve');
 
@@ -26,7 +26,7 @@ exports.getOne = async (req, res) => {
 exports.getInscriptionsFormation = async (req, res) => {
   try {
     const inscriptions = await InscriptionFormation.findAll({
-      where: { FormationId: req.params.id },
+      where: { formationId: req.params.id },
       include: [Formation, Eleve],
     });
     res.status(200).json(inscriptions);
@@ -38,7 +38,7 @@ exports.getInscriptionsFormation = async (req, res) => {
 exports.getInscriptions = async (req, res) => {
   try {
     const inscriptions = await InscriptionFormation.findAll({
-      where: { EleveId: req.params.id },
+      where: { eleveId: req.params.id },
       include: [Formation, Eleve],
     });
     res.status(200).json(inscriptions);
@@ -81,4 +81,3 @@ exports.delete = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
- */

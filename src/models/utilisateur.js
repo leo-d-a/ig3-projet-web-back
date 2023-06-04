@@ -1,6 +1,6 @@
 const DataTypes = require('sequelize');
 const sequelize = require('../config/database');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const Utilisateur = sequelize.define('Utilisateur', {
   utilisateurId: {
@@ -39,18 +39,20 @@ const Utilisateur = sequelize.define('Utilisateur', {
   motDePasse: {
     type: DataTypes.STRING,
     allowNull: false,
-    /* set(value) {
-      const hash = bcrypt.hashSync(value, 10);
-      this.setDataValue('motDePasse', hash);
-    }, */
     validate: {
       len: [8, 128],
     },
   },
   estAdmin: {
     type: DataTypes.BOOLEAN,
+    allowNull: false,
     defaultValue: false,
   },
+});
+
+Utilisateur.beforeCreate(async (utilisateur, options) => {
+  const hashedPassword = await bcrypt.hash(utilisateur.motDePasse, 10);
+  utilisateur.motDePasse = hashedPassword;
 });
 
 Utilisateur.afterCreate((utilisateur, options) => {

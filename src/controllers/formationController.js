@@ -1,4 +1,4 @@
-/* const Formation = require('../models/formation');
+const Formation = require('../models/formation');
 const Eleve = require('../models/eleve');
 
 exports.getAll = async (_, res) => {
@@ -22,17 +22,20 @@ exports.getOne = async (req, res) => {
   }
 };
 
-exports.getInscrits = async (req, res) => {
+exports.getElevesByFormation = async (req, res) => {
   try {
-    const formation = await Formation.findByPk(req.params.id, { include: Eleve });
+    const formationId = req.params.formationId;
+    const formation = await Formation.findByPk(formationId);
     if (!formation) {
       return res.status(404).json({ error: 'Formation not found' });
     }
-    res.status(200).json(formation.Eleves);
+    const eleves = await formation.getEleves();
+    res.status(200).json(eleves);
   } catch (err) {
-    return res.status(500).json({ error: err.message });
+    res.status(500).json({ error: err.message });
   }
 };
+
 
 exports.create = async (req, res) => {
   try {
@@ -108,4 +111,3 @@ exports.annulerInscription = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
- */

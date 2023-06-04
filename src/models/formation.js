@@ -1,4 +1,4 @@
-/* const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
 const Formation = sequelize.define('Formation', {
@@ -39,4 +39,3 @@ const Formation = sequelize.define('Formation', {
 });
 
 module.exports = Formation;
- */

@@ -1,4 +1,4 @@
-/* const Patient = require('../models/patient');
+const Patient = require('../models/patient');
 const Utilisateur = require('../models/utilisateur');
 
 exports.getAll = async (_, res) => {
@@ -69,4 +69,3 @@ exports.delete = async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 };
- */

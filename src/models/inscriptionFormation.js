@@ -1,21 +1,18 @@
-/* const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const Eleve = require('./eleve');
-const Formation = require('./formation');
 
 const InscriptionFormation = sequelize.define('InscriptionFormation',{
-  idInscription: {
+  ID_eleve: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
+    allowNull: false,
     primaryKey: true,
-    allowNull: false,
   },
-  dateInscription: {
-    type: DataTypes.DATE,
+  ID_formation: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
     allowNull: false,
-    validate: {
-      isDate: true,
-    },
+    primaryKey: true,
   },
   estAnnulee: {
     type: DataTypes.BOOLEAN,
@@ -31,7 +28,12 @@ const InscriptionFormation = sequelize.define('InscriptionFormation',{
     allowNull: false,
     defaultValue: false,
   },
+  idInscription: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    unique: true,
+    allowNull: false
+  },
 });
 
 module.exports = InscriptionFormation;
- */

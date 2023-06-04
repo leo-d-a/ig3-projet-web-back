@@ -1,21 +1,21 @@
-/* const express = require('express');
+const express = require('express');
 const controller = require('../controllers/avisController');
+const authenticateJWT = require('../middleware/authenticateJWT'); // chemin vers votre middleware authenticateJWT
 const router = express.Router();
 
 // GET REQUESTS
-router.get('/', controller.getAll);
-router.get('/:id', controller.getOne);
-router.get('/formations/:id', controller.getAvisFormation);
-router.get('/eleves/:id', controller.getAvisEleve);
+router.get('/', authenticateJWT, controller.getAll);
+router.get('/:id', authenticateJWT, controller.getOne);
+router.get('/formations/:id', authenticateJWT, controller.getAvisFormation);
+router.get('/eleves/:id', authenticateJWT, controller.getAvisEleve);
 
 // POST REQUEST
-router.post('/', controller.create);
+router.post('/', authenticateJWT, controller.create);
 
 // PUT REQUEST
-router.put('/:id', controller.update);
+router.put('/:id', authenticateJWT, controller.update);
 
 // DELETE REQUEST
-router.delete('/:id', controller.delete);
+router.delete('/:id', authenticateJWT, controller.delete);
 
 module.exports = router;
- */
